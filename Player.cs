@@ -10,15 +10,15 @@ public class Player : MonoBehaviour
     float vAxis;
     bool wDown;
     bool jDown;
-
+    
     bool isJump;
     bool isDodge;
 
     Rigidbody rigid;
-
+    Animator anim;
+    
     Vector3 moveVec;
 
-    Animator anim;
 
     void Awake()
     {
@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        moveVec = new Vector3(hAxis, 0, vAxis).normalized;
+        moveVec = new Vector3(hAxis, 0, vAxis).normalized; //노멀라이즈 = 대각선도 스피드 동일하게 적용
 
         transform.position += moveVec * speed * (wDown?0.4f:1f) * Time.deltaTime;
 
