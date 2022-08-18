@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     float vAxis;
     bool wDown;
     bool jDown;
+    bool iDown;
     
     bool isJump;
     bool isDodge;
@@ -18,6 +19,8 @@ public class Player : MonoBehaviour
     Animator anim;
     
     Vector3 moveVec;
+
+    GameObject nearObject;
 
 
     void Awake()
@@ -35,6 +38,7 @@ public class Player : MonoBehaviour
         Turn();
         Jump();
         Dodge();
+        Interation();
 
 
     }
@@ -45,6 +49,7 @@ public class Player : MonoBehaviour
         vAxis = Input.GetAxisRaw("Vertical");
         wDown = Input.GetButton("Walk");
         jDown = Input.GetButtonDown("Jump");
+        iDown = Input.GetButton("Interation");
     }
 
     void Move()
@@ -104,6 +109,33 @@ public class Player : MonoBehaviour
          anim.SetBool("isJump", false);
          isJump = false;
 
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+
+        if( other.tag == "Weapon")
+        {
+            nearObject = other.gameObject;
+
+            Debug.Log(nearObject.name);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if( other.tag == "Weapon")
+        {
+            nearObject = null;
+        }
+    }
+    
+    void Interation()
+    {
+        if(iDown && nearObject != null && !isJump && !isDodge)
+        {
+            
         }
     }
 }
