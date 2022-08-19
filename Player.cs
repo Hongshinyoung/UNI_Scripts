@@ -6,8 +6,12 @@ public class Player : MonoBehaviour
 {
 
     public float speed;
+    public GameObject[] weapons;
+    public bool[] hasWeapons;
+
     float hAxis;
     float vAxis;
+
     bool wDown;
     bool jDown;
     bool iDown;
@@ -19,6 +23,7 @@ public class Player : MonoBehaviour
     Animator anim;
     
     Vector3 moveVec;
+    Vector3 dodgeVec;
 
     GameObject nearObject;
 
@@ -135,7 +140,14 @@ public class Player : MonoBehaviour
     {
         if(iDown && nearObject != null && !isJump && !isDodge)
         {
-            
+            if(nearObject.tag == "Weapon")
+            {
+                Item item = nearObject.GetComponent<Item>();
+                int weaponIndex = item.value;
+                hasWeapons[weaponIndex] = true;
+
+                Destroy(nearObject);
+            }
         }
     }
 }
