@@ -52,6 +52,7 @@ public class Player : MonoBehaviour
         Dodge();
         Interation();
         Swap();
+        SwapOut();
 
     }
 
@@ -137,23 +138,17 @@ public class Player : MonoBehaviour
         {
             nearObject = other.gameObject;
 
-            Debug.Log(nearObject.name);
+            Debug.Log(nearObject.gameObject.name);
         }
     }
 
     void OnTriggerExit(Collider other)
     {
         if( other.tag == "Weapon")
-        {
             nearObject = null;
-        }
+        
     }
 
-    void SwapOut()
-    {
-        isSwap = false;
-
-    }
 
     void Swap()
     {
@@ -186,6 +181,12 @@ public class Player : MonoBehaviour
         }
     }
     
+    void SwapOut()
+    {
+        isSwap = false;
+
+    }
+
     void Interation()
     {
         if(iDown && nearObject != null && !isJump && !isDodge)
